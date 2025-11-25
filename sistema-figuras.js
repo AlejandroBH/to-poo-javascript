@@ -329,9 +329,6 @@ const hexagono = new Hexagono(10);
 const esfera = new Circulo(3);
 const cubo = new Rectangulo(15, 15, 15);
 
-console.log(pentagono.id);
-console.log(pentagono2.id);
-
 // Crear colección
 const coleccion = new ColeccionFiguras();
 
