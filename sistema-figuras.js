@@ -3,7 +3,7 @@
 // Clase base abstracta
 class FiguraGeometrica {
   constructor(nombre) {
-    this.nombre = nombre;
+    this.nombre = Validacion.isString(nombre);
     this.#id = Math.random().toString(36).substr(2, 9);
   }
 
@@ -55,7 +55,7 @@ class FiguraGeometrica {
 class Circulo extends FiguraGeometrica {
   constructor(radio) {
     super("Círculo");
-    this.radio = radio;
+    this.radio = Validacion.isNumber(radio);
   }
 
   calcularArea() {
@@ -76,8 +76,8 @@ class Circulo extends FiguraGeometrica {
 class Rectangulo extends FiguraGeometrica {
   constructor(ancho, alto) {
     super("Rectángulo");
-    this.ancho = ancho;
-    this.altura = alto;
+    this.ancho = Validacion.isNumber(ancho);
+    this.altura = Validacion.isNumber(alto);
   }
 
   calcularArea() {
@@ -98,8 +98,8 @@ class Rectangulo extends FiguraGeometrica {
 class Triangulo extends FiguraGeometrica {
   constructor(base, altura) {
     super("Triángulo");
-    this.base = base;
-    this.altura = altura;
+    this.base = Validacion.isNumber(base);
+    this.altura = Validacion.isNumber(altura);
   }
 
   calcularArea() {
@@ -122,7 +122,7 @@ class Triangulo extends FiguraGeometrica {
 class Pentagono extends FiguraGeometrica {
   constructor(lado) {
     super("Pentágono");
-    this.lado = lado;
+    this.lado = Validacion.isNumber(lado);
   }
 
   calcularArea() {
@@ -153,7 +153,7 @@ class Pentagono extends FiguraGeometrica {
 class Hexagono extends FiguraGeometrica {
   constructor(lado) {
     super("Hexágono");
-    this.lado = lado;
+    this.lado = Validacion.isNumber(lado);
   }
 
   calcularArea() {
@@ -234,6 +234,22 @@ class ColeccionFiguras {
     } else {
       return `Ambas figuras tienen la misma área`;
     }
+  }
+}
+
+class Validacion {
+  static isString(value) {
+    if (typeof value !== "string")
+      throw new TypeError(`${value}, no es un string`);
+
+    return value;
+  }
+
+  static isNumber(value) {
+    if (typeof value !== "number")
+      throw new TypeError(`${value}, no es un number`);
+
+    return value;
   }
 }
 
