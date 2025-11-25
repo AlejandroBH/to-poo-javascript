@@ -118,6 +118,68 @@ class Triangulo extends FiguraGeometrica {
   }
 }
 
+// Clase Pentágono
+class Pentagono extends FiguraGeometrica {
+  constructor(lado) {
+    super("Pentágono");
+    this.lado = lado;
+  }
+
+  calcularArea() {
+    return (this.calcularPerimetro() * this.calcularApotema()) / 2;
+  }
+
+  calcularPerimetro() {
+    return 5 * this.lado;
+  }
+
+  // Método específico
+  calcularApotema() {
+    return this.lado / (2 * Math.tan(Math.PI / 5));
+  }
+
+  // Método específico
+  anguloInterior() {
+    return (180 * (5 - 2)) / 5;
+  }
+
+  // Método específico
+  anguloExterior() {
+    return 360 / 5;
+  }
+}
+
+// Clase Hexágono
+class Hexagono extends FiguraGeometrica {
+  constructor(lado) {
+    super("Hexágono");
+    this.lado = lado;
+  }
+
+  calcularArea() {
+    return (this.calcularPerimetro() * this.calcularApotema()) / 2;
+  }
+
+  calcularPerimetro() {
+    return 6 * this.lado;
+  }
+
+  // Método específico
+  calcularApotema() {
+    return (this.lado * Math.sqrt(3)) / 2;
+  }
+
+  // Método específico
+  anguloInterior() {
+    return (180 * (6 - 2)) / 6;
+  }
+
+  // Método específico
+  anguloExterior() {
+    return 360 / 6;
+  }
+}
+
 // Clase para gestionar colección de figuras
 class ColeccionFiguras {
   constructor() {
@@ -183,6 +245,8 @@ const circulo = new Circulo(5);
 const rectangulo = new Rectangulo(10, 8);
 const cuadrado = new Rectangulo(6, 6);
 const triangulo = new Triangulo(8, 6);
+const pentagono = new Pentagono(10);
+const hexagono = new Hexagono(10);
 
 // Crear colección
 const coleccion = new ColeccionFiguras();
@@ -192,6 +256,8 @@ coleccion.agregar(circulo);
 coleccion.agregar(rectangulo);
 coleccion.agregar(cuadrado);
 coleccion.agregar(triangulo);
+coleccion.agregar(pentagono);
+coleccion.agregar(hexagono);
 
 // Listar todas las figuras
 coleccion.listarFiguras();
@@ -208,6 +274,7 @@ console.log(`\n📋 Rectángulos encontrados: ${rectangulos.length}`);
 
 // Comparar áreas
 console.log(`\n⚖️  ${ColeccionFiguras.compararAreas(circulo, rectangulo)}`);
+console.log(`\n⚖️  ${ColeccionFiguras.compararAreas(pentagono, hexagono)}`);
 
 // Métodos específicos
 console.log(`\n🔍 FUNCIONES ESPECÍFICAS:`);
@@ -216,19 +283,21 @@ console.log(`¿El cuadrado es cuadrado?: ${cuadrado.esCuadrado()}`);
 console.log(
   `Hipotenusa del triángulo: ${triangulo.calcularHipotenusa().toFixed(2)}`
 );
+console.log(`Angulo interior de pentagono: ${pentagono.anguloInterior()}`);
+console.log(`Angulo exterior de hexagono: ${hexagono.anguloExterior()}`);
 
-// Serialización (usando método estático)
-const circuloJSON = JSON.stringify({
-  tipo: "circulo",
-  radio: 3,
-});
+// // Serialización (usando método estático)
+// const circuloJSON = JSON.stringify({
+//   tipo: "circulo",
+//   radio: 3,
+// });
 
-const circuloDesdeJSON = FiguraGeometrica.crearDesdeJSON(circuloJSON);
-console.log(`\n📦 Figura creada desde JSON: ${circuloDesdeJSON.describir()}`);
+// const circuloDesdeJSON = FiguraGeometrica.crearDesdeJSON(circuloJSON);
+// console.log(`\n📦 Figura creada desde JSON: ${circuloDesdeJSON.describir()}`);
 
-// Demostrar encapsulamiento
-console.log(`\n🔒 ENCAPSULAMIENTO:`);
-console.log(`ID del círculo: ${circulo.id}`);
-// console.log(circulo.#id); // ❌ Error: Propiedad privada
+// // Demostrar encapsulamiento
+// console.log(`\n🔒 ENCAPSULAMIENTO:`);
+// console.log(`ID del círculo: ${circulo.id}`);
+// // console.log(circulo.#id); // ❌ Error: Propiedad privada
 
-console.log("\n✅ Sistema POO completo implementado exitosamente!");
+// console.log("\n✅ Sistema POO completo implementado exitosamente!");
