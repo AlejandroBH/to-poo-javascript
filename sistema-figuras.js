@@ -210,8 +210,12 @@ class Pentagono extends FiguraGeometrica {
 // Clase Hexágono
 class Hexagono extends FiguraGeometrica {
   constructor(lado) {
+    if (Hexagono.instancia) {
+      return Hexagono.instancia;
+    }
     super("Hexágono");
     this.lado = Validacion.isNumber(lado);
+    Hexagono.instancia = this;
   }
 
   calcularArea() {
@@ -320,9 +324,13 @@ const rectangulo = new Rectangulo(10, 8);
 const cuadrado = new Rectangulo(6, 6);
 const triangulo = new Triangulo(8, 6);
 const pentagono = new Pentagono(10);
+const pentagono2 = new Pentagono(10);
 const hexagono = new Hexagono(10);
 const esfera = new Circulo(3);
 const cubo = new Rectangulo(15, 15, 15);
+
+console.log(pentagono.id);
+console.log(pentagono2.id);
 
 // Crear colección
 const coleccion = new ColeccionFiguras();
@@ -395,5 +403,21 @@ coleccionFactory.agregar(cuadradoByFactory);
 coleccionFactory.agregar(trianguloByFactory);
 
 coleccionFactory.listarFiguras();
+
+console.log(`\n📋 Pentagono con instancia unica (singleton):`);
+const hexagono2 = new Hexagono(7);
+const hexagono3 = new Hexagono(8);
+const circulo2 = new Circulo(5);
+const circulo3 = new Circulo(6);
+
+console.log(
+  "instancias de hexagono2 y hexagono3 son las mismas?",
+  hexagono2.id === hexagono3.id ? "si" : "no"
+);
+
+console.log(
+  "instancias de circulo2 y circulo3 son las mismas?",
+  circulo2.id === circulo3.id ? "si" : "no"
+);
 
 console.log("\n✅ Sistema POO completo implementado exitosamente!");
