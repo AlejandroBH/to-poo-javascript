@@ -105,6 +105,30 @@ class Rectangulo extends FiguraGeometrica {
   calcularVolumen() {
     return this.largo * this.ancho * this.altura;
   }
+
+  // Método específico
+  dibujarFiguraASCII() {
+    let resultado = "";
+
+    for (let y = 0; y < this.altura; y++) {
+      let fila = "";
+      for (let x = 0; x < this.ancho; x++) {
+        if (
+          y === 0 ||
+          y === this.altura - 1 ||
+          x === 0 ||
+          x === this.ancho - 1
+        ) {
+          fila += "# ";
+        } else {
+          fila += "# ";
+        }
+      }
+      resultado += fila + "\n";
+    }
+
+    return resultado;
+  }
 }
 
 // Clase Triángulo
@@ -334,5 +358,9 @@ console.log(`\n📦 Figura creada desde JSON: ${circuloDesdeJSON.describir()}`);
 console.log(`\n🔒 ENCAPSULAMIENTO:`);
 console.log(`ID del círculo: ${circulo.id}`);
 // console.log(circulo.#id); // ❌ Error: Propiedad privada
+
+console.log(`\n🔒 Dibujar figuras con caracteres ASCII:`);
+console.log(cuadrado.dibujarFiguraASCII());
+console.log(rectangulo.dibujarFiguraASCII());
 
 console.log("\n✅ Sistema POO completo implementado exitosamente!");
