@@ -70,14 +70,21 @@ class Circulo extends FiguraGeometrica {
   calcularDiametro() {
     return this.radio * 2;
   }
+
+  // Método específico
+  // Calcular volumen de círculo 3D
+  calcularVolumen() {
+    return (4 / 3) * Math.PI * Math.pow(this.radio, 3);
+  }
 }
 
 // Clase Rectángulo
 class Rectangulo extends FiguraGeometrica {
-  constructor(ancho, alto) {
+  constructor(ancho, alto, largo = 0) {
     super("Rectángulo");
     this.ancho = Validacion.isNumber(ancho);
     this.altura = Validacion.isNumber(alto);
+    this.largo = Validacion.isNumber(largo);
   }
 
   calcularArea() {
@@ -91,6 +98,12 @@ class Rectangulo extends FiguraGeometrica {
   // Método específico
   esCuadrado() {
     return this.ancho === this.altura;
+  }
+
+  // Método específico
+  // Calcular volumen de rectángulo 3D
+  calcularVolumen() {
+    return this.largo * this.ancho * this.altura;
   }
 }
 
@@ -263,6 +276,8 @@ const cuadrado = new Rectangulo(6, 6);
 const triangulo = new Triangulo(8, 6);
 const pentagono = new Pentagono(10);
 const hexagono = new Hexagono(10);
+const esfera = new Circulo(3);
+const cubo = new Rectangulo(15, 15, 15);
 
 // Crear colección
 const coleccion = new ColeccionFiguras();
@@ -274,6 +289,8 @@ coleccion.agregar(cuadrado);
 coleccion.agregar(triangulo);
 coleccion.agregar(pentagono);
 coleccion.agregar(hexagono);
+coleccion.agregar(esfera);
+coleccion.agregar(cubo);
 
 // Listar todas las figuras
 coleccion.listarFiguras();
@@ -301,19 +318,21 @@ console.log(
 );
 console.log(`Angulo interior de pentagono: ${pentagono.anguloInterior()}`);
 console.log(`Angulo exterior de hexagono: ${hexagono.anguloExterior()}`);
+console.log(`Volumen de la esfera: ${esfera.calcularVolumen()}`);
+console.log(`Volumen del cubo: ${cubo.calcularVolumen()}`);
 
-// // Serialización (usando método estático)
-// const circuloJSON = JSON.stringify({
-//   tipo: "circulo",
-//   radio: 3,
-// });
+// Serialización (usando método estático)
+const circuloJSON = JSON.stringify({
+  tipo: "circulo",
+  radio: 3,
+});
 
-// const circuloDesdeJSON = FiguraGeometrica.crearDesdeJSON(circuloJSON);
-// console.log(`\n📦 Figura creada desde JSON: ${circuloDesdeJSON.describir()}`);
+const circuloDesdeJSON = FiguraGeometrica.crearDesdeJSON(circuloJSON);
+console.log(`\n📦 Figura creada desde JSON: ${circuloDesdeJSON.describir()}`);
 
-// // Demostrar encapsulamiento
-// console.log(`\n🔒 ENCAPSULAMIENTO:`);
-// console.log(`ID del círculo: ${circulo.id}`);
-// // console.log(circulo.#id); // ❌ Error: Propiedad privada
+// Demostrar encapsulamiento
+console.log(`\n🔒 ENCAPSULAMIENTO:`);
+console.log(`ID del círculo: ${circulo.id}`);
+// console.log(circulo.#id); // ❌ Error: Propiedad privada
 
-// console.log("\n✅ Sistema POO completo implementado exitosamente!");
+console.log("\n✅ Sistema POO completo implementado exitosamente!");
