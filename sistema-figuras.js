@@ -51,6 +51,27 @@ class FiguraGeometrica {
   }
 }
 
+// Factory pattern para crear diferentes tipos de figuras
+function FabricaFiguras(tipo, ...datosBase) {
+  switch (tipo) {
+    case "circulo":
+      const [radio] = datosBase;
+      return new Circulo(radio);
+    case "rectangulo":
+      const [ancho, alto, largo = 0] = datosBase;
+      return new Rectangulo(ancho, alto, largo);
+    case "triangulo":
+      const [base, altura] = datosBase;
+      return new Triangulo(base, altura);
+    case "pentagono":
+      const [ladoPen] = datosBase;
+      return new Pentagono(ladoPen);
+    case "hexagono":
+      const [ladoHex] = datosBase;
+      return new Hexagono(ladoHex);
+  }
+}
+
 // Clase Círculo
 class Circulo extends FiguraGeometrica {
   constructor(radio) {
@@ -359,8 +380,20 @@ console.log(`\n🔒 ENCAPSULAMIENTO:`);
 console.log(`ID del círculo: ${circulo.id}`);
 // console.log(circulo.#id); // ❌ Error: Propiedad privada
 
-console.log(`\n🔒 Dibujar figuras con caracteres ASCII:`);
+console.log(`\n✏️  Dibujar figuras con caracteres ASCII:`);
 console.log(cuadrado.dibujarFiguraASCII());
 console.log(rectangulo.dibujarFiguraASCII());
+
+console.log(`📋 Crear figuras con Factory Pattern:\n`);
+const circuloByFactory = FabricaFiguras("circulo", 10);
+const cuadradoByFactory = FabricaFiguras("rectangulo", 15, 15);
+const trianguloByFactory = FabricaFiguras("triangulo", 5, 5);
+
+const coleccionFactory = new ColeccionFiguras();
+coleccionFactory.agregar(circuloByFactory);
+coleccionFactory.agregar(cuadradoByFactory);
+coleccionFactory.agregar(trianguloByFactory);
+
+coleccionFactory.listarFiguras();
 
 console.log("\n✅ Sistema POO completo implementado exitosamente!");
